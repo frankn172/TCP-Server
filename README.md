@@ -1,8 +1,6 @@
 # TCP-Server
 
-Binh Trinh
-
-Frank Ngo
+Team members: Binh Trinh & Frank Ngo
 
 
 python htmlServer.py
