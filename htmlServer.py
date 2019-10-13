@@ -19,15 +19,21 @@ while True:
     connectionSocket, addr = serverSocket.accept()
     try:
         message = connectionSocket.recv(1024).decode()
+        print(message)
         filename = message.split()[1]
         f = open(filename[1:])
         outputdata = f.read()
         # send one HTTP header line into socket
-        connectionSocket.send(b'HTTP/1.1 200 OK\r\n')
+        connectionSocket.send(b'From Server: HTTP/1.1 200 OK\r\n')
+        connectionSocket.send(b'Connection: close\r\n')
+        connectionSocket.send(b'Content-Length: 320\r\n')
+        connectionSocket.send(b'Content-Type: text/html\r\n')
         connectionSocket.send(b'\r\n')
         # send the content of the requested file to the client
+
         for i in range(0, len(outputdata)):
             connectionSocket.send(outputdata[i].encode())
+
         connectionSocket.send("\r\n".encode())
         connectionSocket.close()
     except IOError:
