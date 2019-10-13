@@ -6,7 +6,10 @@ serverSocket = socket(AF_INET, SOCK_STREAM)
 
 # prepare a server socket
 serverPort = 1702
+
+# tesll kernel to reuse local socket without waiting for its natural timeout to expire
 serverSocket.setsockopt(SOL_SOCKET, SO_REUSEADDR, 1)
+
 serverSocket.bind(('', serverPort))
 serverSocket.listen(1)
 
